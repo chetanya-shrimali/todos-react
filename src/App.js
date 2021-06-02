@@ -7,6 +7,7 @@ function App() {
   const [todoList, setTodoList] = useState(data);
   const addTodo = () => {
     let todo = {
+      id: Math.random() * 10000 + 1,
       title: "newTitle",
       description: "new description"
     };
