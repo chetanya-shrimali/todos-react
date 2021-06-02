@@ -20,10 +20,30 @@ function App() {
       })
     );
   };
+
+  const filteredResults = (e) => {
+    if (e.target.value) {
+      console.log(e.target.value);
+      setTodoList(
+        data.filter((todo) => {
+          return (
+            todo.title.toLowerCase().indexOf(e.target.value.toLowerCase()) !==
+              -1 ||
+            todo.description
+              .toLowerCase()
+              .indexOf(e.target.value.toLowerCase()) !== -1
+          );
+        })
+      );
+    } else {
+      setTodoList(data);
+    }
+  };
+
   return (
     <div className="App">
       <div className="input-container">
-        <input type="text" style={{ flex: "80%" }} />
+        <input type="text" style={{ flex: "80%" }} onChange={filteredResults} />
         <button style={{ flex: "10%" }} onClick={addTodo}>
           Add
         </button>
