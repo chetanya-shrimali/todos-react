@@ -5,7 +5,7 @@ function Todo({ todo, deleteEvent }) {
         <h4>{todo.title}</h4>
         <p>{todo.description}</p>
       </div>
-      <div style={{ flex: "10%", alignSelf: "center" }}>
+      <div style={{ flex: "10%" }}>
         <button
           className="close"
           aria-label="delete item"
