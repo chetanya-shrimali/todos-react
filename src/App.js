@@ -1,17 +1,21 @@
 import { useState } from "react";
 import TodoList from "./components/todoList";
+import TodoForm from "./components/todoForm";
 import data from "./data";
 import "./styles.css";
 
 function App() {
   const [todoList, setTodoList] = useState(data);
-  const addTodo = () => {
+  const [toggleTodoForm, setToggleTodoForm] = useState(false);
+
+  const addTodo = (title, description) => {
     let todo = {
       id: Math.random() * 10000 + 1,
-      title: "newTitle",
-      description: "new description"
+      title,
+      description
     };
     setTodoList([...todoList, todo]);
+    setToggleTodoForm(false);
   };
 
   const deleteTodo = (id) => {
@@ -45,11 +49,21 @@ function App() {
     <div className="App">
       <div className="input-container">
         <input type="text" style={{ flex: "80%" }} onChange={filteredResults} />
-        <button style={{ flex: "10%" }} onClick={addTodo}>
-          Add
+        <button
+          style={{ flex: "10%" }}
+          // className={"cursor " + (toggleTodoForm ? "green" : "black")}
+          onClick={() => {
+            setToggleTodoForm(!toggleTodoForm);
+          }}
+        >
+          {toggleTodoForm ? "Go Back" : "Add"}
         </button>
       </div>
-      <TodoList todos={todoList} deleteTodo={deleteTodo} />
+      {!toggleTodoForm ? (
+        <TodoList todos={todoList} deleteTodo={deleteTodo} />
+      ) : (
+        <TodoForm addEvent={addTodo} />
+      )}
     </div>
   );
 }
